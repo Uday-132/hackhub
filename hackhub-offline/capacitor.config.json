@@ -1,0 +1,6 @@
+{
+  "appId": "com.uday.hackhub",
+  "appName": "HackHub Offline",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
