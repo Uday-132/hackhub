@@ -12,6 +12,10 @@ import AdminDashboard from './pages/admin/Dashboard';
 import AddEvent from './pages/admin/AddEvent';
 import Unauthorized from './pages/Unauthorized';
 import Search from './pages/Search';
+import Profile from './pages/Profile';
+import EditProfile from './pages/settings/EditProfile';
+import Notifications from './pages/settings/Notifications';
+import PrivacySecurity from './pages/settings/PrivacySecurity';
 
 function App() {
   return (
@@ -28,6 +32,10 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/events" element={<Events />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings/edit-profile" element={<EditProfile />} />
+            <Route path="/settings/notifications" element={<Notifications />} />
+            <Route path="/settings/privacy" element={<PrivacySecurity />} />
             <Route path="/events/:id" element={<EventDetails />} />
           </Route>
 

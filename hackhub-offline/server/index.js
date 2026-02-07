@@ -17,8 +17,13 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: false, limit: '50mb' }));
+
+// Health Check Route
+app.get('/', (req, res) => {
+    res.status(200).json({ status: 'Server is running', env: process.env.NODE_ENV });
+});
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
@@ -28,4 +33,10 @@ app.use('/api/registrations', require('./routes/registrationRoutes'));
 // Global Error Handler
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+// Export the app for Vercel
+module.exports = app;
+
+// Only listen if not running on Vercel (local development)
+if (require.main === module) {
+    app.listen(port, () => console.log(`Server started on port ${port}`));
+}
