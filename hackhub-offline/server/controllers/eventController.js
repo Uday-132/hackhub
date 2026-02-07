@@ -99,10 +99,20 @@ const updateEvent = asyncHandler(async (req, res) => {
     res.status(200).json(updatedEvent);
 });
 
+// @desc    Get logged in admin's events
+// @route   GET /api/events/mine
+// @access  Private/Admin
+const getMyEvents = asyncHandler(async (req, res) => {
+    // Only fetch events created by the logged in admin
+    const events = await Event.find({ createdBy: req.user.id }).sort({ date: 1 });
+    res.status(200).json(events);
+});
+
 module.exports = {
     getEvents,
     getEvent,
     createEvent,
     deleteEvent,
     updateEvent,
+    getMyEvents,
 };
