@@ -12,10 +12,9 @@ const app = express();
 
 // Robust CORS configuration
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://hackhub-alpha.vercel.app', 'http://localhost:5000', 'https://hackhub-fzumh2e5u-uday-132s-projects.vercel.app'],
-    credentials: true,
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json({ limit: '50mb' }));
