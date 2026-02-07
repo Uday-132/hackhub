@@ -18,17 +18,26 @@ export default function AdminNavbar() {
                     <span className="text-[10px] font-medium">HOME</span>
                 </button>
 
-                <button className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300">
+                <button
+                    onClick={() => navigate('/admin/users')}
+                    className={`flex flex-col items-center gap-1 ${isActive('/admin/users') ? 'text-blue-500' : 'text-gray-500 hover:text-gray-300'}`}
+                >
                     <Users size={24} />
                     <span className="text-[10px] font-medium">USERS</span>
                 </button>
 
-                <button className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300">
+                <button
+                    onClick={() => navigate('/admin/stats')}
+                    className={`flex flex-col items-center gap-1 ${isActive('/admin/stats') ? 'text-blue-500' : 'text-gray-500 hover:text-gray-300'}`}
+                >
                     <BarChart2 size={24} />
                     <span className="text-[10px] font-medium">STATS</span>
                 </button>
 
-                <button className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300">
+                <button
+                    onClick={() => navigate('/admin/settings')}
+                    className={`flex flex-col items-center gap-1 ${isActive('/admin/settings') ? 'text-blue-500' : 'text-gray-500 hover:text-gray-300'}`}
+                >
                     <Settings size={24} />
                     <span className="text-[10px] font-medium">SETTINGS</span>
                 </button>

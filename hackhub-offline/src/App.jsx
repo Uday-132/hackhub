@@ -10,6 +10,9 @@ import Events from './pages/Events';
 import EventDetails from './pages/EventDetails';
 import AdminDashboard from './pages/admin/Dashboard';
 import AddEvent from './pages/admin/AddEvent';
+import AdminUsers from './pages/admin/Users';
+import AdminStats from './pages/admin/Stats';
+import AdminSettings from './pages/admin/Settings';
 import Unauthorized from './pages/Unauthorized';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
@@ -44,6 +47,9 @@ function App() {
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/add-event" element={<AddEvent />} />
             <Route path="/admin/edit-event/:id" element={<AddEvent />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/stats" element={<AdminStats />} />
+            <Route path="/admin/settings" element={<AdminSettings />} />
           </Route>
         </Routes>
       </AuthProvider>
