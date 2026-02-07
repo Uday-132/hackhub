@@ -9,6 +9,7 @@ export default function Profile() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    console.log('Current User State:', user);
     const [bliinkName, setBlinkName] = useState(false);
 
     useEffect(() => {
@@ -75,7 +76,7 @@ export default function Profile() {
                             className={`font-bold mb-1 text-center text-white ${bliinkName ? 'animate-blink' : ''}`}
                             style={{ fontSize: rf(24) }}
                         >
-                            {user.name}
+                            {user.name || 'User'}
                         </h1>
 
                         <div className="flex items-center gap-2 bg-white/5 border border-white/5 px-4 py-1.5 rounded-full mt-2">
