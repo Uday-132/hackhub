@@ -31,7 +31,7 @@ export default function Landing() {
 
                 {/* Title */}
                 <h1 className="text-5xl md:text-7xl font-bold mb-6 text-center tracking-tight">
-                    HackHub <span className="text-blue-500">Offline</span>
+                    Hackathons <span className="text-blue-500">Offline</span>
                 </h1>
 
                 {/* Tagline */}

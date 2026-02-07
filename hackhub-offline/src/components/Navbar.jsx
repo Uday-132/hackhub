@@ -18,7 +18,10 @@ export default function Navbar() {
                     <span className="text-[10px] font-medium">EXPLORE</span>
                 </button>
 
-                <button className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300">
+                <button
+                    onClick={() => navigate('/search')}
+                    className={`flex flex-col items-center gap-1 ${isActive('/search') ? 'text-purple-500' : 'text-gray-500 hover:text-gray-300'}`}
+                >
                     <Search size={24} />
                     <span className="text-[10px] font-medium">SEARCH</span>
                 </button>

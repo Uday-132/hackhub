@@ -48,7 +48,7 @@ export default function Dashboard() {
                         <div className="bg-white/10 p-2 rounded-lg">
                             <Terminal size={20} className="text-white" />
                         </div>
-                        <span className="text-lg font-bold text-gray-300">HackHub Admin</span>
+                        <span className="text-lg font-bold text-gray-300">Hackathons Admin</span>
                     </div>
                     <button
                         onClick={() => navigate('/admin/add-event')}

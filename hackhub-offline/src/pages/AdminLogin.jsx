@@ -47,7 +47,7 @@ export default function AdminLogin() {
                     </div>
                 </div>
                 <div className="absolute left-1/2 -translate-x-1/2 font-bold text-lg tracking-wide">
-                    HackHub Admin
+                    Hackathons Admin
                 </div>
             </header>
 
@@ -80,7 +80,7 @@ export default function AdminLogin() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="w-full bg-[#1a1a1a] border border-white/5 rounded-lg px-4 py-3.5 text-gray-300 placeholder-gray-600 focus:ring-1 focus:ring-red-500 focus:border-red-500 outline-none transition-all"
-                                    placeholder="admin@hackhub.com"
+                                    placeholder="admin@hackathons.com"
                                     required
                                 />
                             </div>

@@ -47,7 +47,7 @@ export default function Login() {
                     <div className="bg-blue-600/20 p-2 rounded-lg border border-blue-500/30">
                         <Terminal size={24} className="text-blue-500" />
                     </div>
-                    <span className="text-xl font-bold tracking-tight">HackHub</span>
+                    <span className="text-xl font-bold tracking-tight">Hackathons</span>
                 </div>
                 <button className="text-gray-400 hover:text-white transition-colors">
                     <HelpCircle size={24} />

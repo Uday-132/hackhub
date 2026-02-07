@@ -34,7 +34,7 @@ export default function Events() {
                         <div className="bg-purple-600 p-2 rounded-lg">
                             <Terminal size={20} className="text-white" />
                         </div>
-                        <span className="text-lg font-bold">HackHub.</span>
+                        <span className="text-lg font-bold">Hackathons.</span>
                     </div>
                     <div className="flex items-center gap-4">
                         <button className="bg-gray-800 p-2 rounded-full hover:bg-gray-700 transition-colors relative">

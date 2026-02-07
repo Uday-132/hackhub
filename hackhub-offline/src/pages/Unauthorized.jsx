@@ -57,7 +57,7 @@ export default function Unauthorized() {
             <footer className="p-8 relative z-10 text-center">
                 <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-gray-600 tracking-widest uppercase">
                     <Terminal size={12} />
-                    HackHub Offline Core
+                    Hackathons Offline Core
                 </div>
             </footer>
         </div>

@@ -3,15 +3,15 @@ import axios from 'axios';
 // IMPORTANT: SELECT THE CORRECT API URL
 // ---------------------------------------------------------------------------
 
-// OPTION 1: FOR ANDROID EMULATOR (Use this if running in Android Studio)
-const API_URL = 'http://10.0.2.2:5000/api';
+import { Capacitor } from '@capacitor/core';
 
-// OPTION 2: FOR PHYSICAL DEVICE (Use this if running on a real phone)
-// Replace with your computer's IP address (run 'ipconfig' to find it)
-// const API_URL = 'http://192.168.0.4:5000/api'; 
+// AUTO-DETECT ENVIRONMENT
+const API_URL = Capacitor.isNativePlatform()
+    ? 'http://10.0.2.2:5000/api'  // Android Emulator
+    : 'http://localhost:5000/api'; // Web Browser
 
-// OPTION 3: FOR WEB BROWSER
-// const API_URL = 'http://localhost:5000/api';
+// NOTE: If using a PHYSICAL Android device, you must replace the above with your computer's IP:
+// const API_URL = 'http://192.168.x.x:5000/api';
 
 // ---------------------------------------------------------------------------
 
