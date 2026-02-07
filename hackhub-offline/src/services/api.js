@@ -6,9 +6,7 @@ import axios from 'axios';
 import { Capacitor } from '@capacitor/core';
 
 // AUTO-DETECT ENVIRONMENT
-const API_URL = Capacitor.isNativePlatform()
-    ? 'http://10.0.2.2:5000/api'  // Android Emulator
-    : 'http://localhost:5000/api'; // Web Browser
+const API_URL = 'https://hackhub-alpha.vercel.app/api';
 
 // NOTE: If using a PHYSICAL Android device, you must replace the above with your computer's IP:
 // const API_URL = 'http://192.168.x.x:5000/api';
