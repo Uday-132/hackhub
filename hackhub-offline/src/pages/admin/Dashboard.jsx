@@ -99,7 +99,10 @@ export default function Dashboard() {
                                 </div>
 
                                 <div className="flex items-center gap-2">
-                                    <button className="p-2 text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors">
+                                    <button
+                                        onClick={() => navigate(`/admin/edit-event/${event._id}`)}
+                                        className="p-2 text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors"
+                                    >
                                         <Edit2 size={18} />
                                     </button>
                                     <button

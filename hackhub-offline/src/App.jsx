@@ -43,6 +43,7 @@ function App() {
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/add-event" element={<AddEvent />} />
+            <Route path="/admin/edit-event/:id" element={<AddEvent />} />
           </Route>
         </Routes>
       </AuthProvider>

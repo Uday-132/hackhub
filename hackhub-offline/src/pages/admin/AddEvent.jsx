@@ -1,22 +1,67 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../services/api';
 import { ArrowLeft, MoreHorizontal, MapPin, Calendar, Clock } from 'lucide-react';
 
 export default function AddEvent() {
     const navigate = useNavigate();
+    const { id } = useParams(); // Get event ID if in edit mode
 
     const [loading, setLoading] = useState(false);
+    const [fetching, setFetching] = useState(false);
     const [error, setError] = useState('');
 
     const [formData, setFormData] = useState({
-        title: 'Global AI Innovation Summit',
-        description: 'Join the brightest minds for a 48-hour sprint building the next generation of AI-driven tools. $50k in prizes.',
-        location: 'Innovation Center, San Francisco, CA',
-        date: '2024-10-24',
-        time: '09:00',
+        title: '',
+        description: '',
+        location: '',
+        date: '',
+        time: '',
         tech_stack: ''
     });
+
+    useEffect(() => {
+        if (id) {
+            fetchEventDetails();
+        } else {
+            // Default values for new event
+            setFormData({
+                title: 'Global AI Innovation Summit',
+                description: 'Join the brightest minds for a 48-hour sprint building the next generation of AI-driven tools. $50k in prizes.',
+                location: 'Innovation Center, San Francisco, CA',
+                date: '2024-10-24',
+                time: '09:00',
+                tech_stack: ''
+            });
+        }
+    }, [id]);
+
+    const fetchEventDetails = async () => {
+        setFetching(true);
+        try {
+            const response = await api.get(`/events/${id}`);
+            const event = response.data;
+
+            // Format date for inputs
+            const dateObj = new Date(event.date);
+            const dateStr = dateObj.toISOString().split('T')[0];
+            const timeStr = dateObj.toTimeString().split(' ')[0].substring(0, 5);
+
+            setFormData({
+                title: event.title,
+                description: event.description,
+                location: event.location,
+                date: dateStr,
+                time: timeStr,
+                tech_stack: event.tech_stack ? event.tech_stack.join(', ') : ''
+            });
+        } catch (err) {
+            setError('Failed to fetch event details');
+            console.error(err);
+        } finally {
+            setFetching(false);
+        }
+    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,13 +80,19 @@ export default function AddEvent() {
                 .map(tech => tech.trim())
                 .filter(tech => tech.length > 0);
 
-            await api.post('/events', {
+            const payload = {
                 title: formData.title,
                 description: formData.description,
                 location: formData.location,
                 date: dateTime.toISOString(),
                 tech_stack: techStackArray
-            });
+            };
+
+            if (id) {
+                await api.put(`/events/${id}`, payload);
+            } else {
+                await api.post('/events', payload);
+            }
 
             navigate('/admin/dashboard');
         } catch (err) {
@@ -50,6 +101,14 @@ export default function AddEvent() {
             setLoading(false);
         }
     };
+
+    if (fetching) {
+        return (
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-white text-gray-900 font-sans">
@@ -61,7 +120,7 @@ export default function AddEvent() {
                 >
                     <ArrowLeft size={24} />
                 </button>
-                <h1 className="text-lg font-bold">Edit Event</h1>
+                <h1 className="text-lg font-bold">{id ? 'Edit Event' : 'Add Event'}</h1>
                 <button className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-600">
                     <MoreHorizontal size={24} />
                 </button>
@@ -69,8 +128,8 @@ export default function AddEvent() {
 
             <div className="max-w-2xl mx-auto p-6 pb-24">
                 <div className="mb-8">
-                    <h2 className="text-2xl font-bold mb-2">Event Details</h2>
-                    <p className="text-gray-500 text-sm">Update the information for your hackathon event.</p>
+                    <h2 className="text-2xl font-bold mb-2">{id ? 'Edit Event Details' : 'Event Details'}</h2>
+                    <p className="text-gray-500 text-sm">{id ? 'Update the information for this hackathon.' : 'Enter the information for your new hackathon.'}</p>
                 </div>
 
                 {error && (
@@ -179,7 +238,7 @@ export default function AddEvent() {
                                 disabled={loading}
                                 className="w-full bg-[#1041b2] hover:bg-blue-800 text-white font-bold py-4 rounded-full shadow-xl shadow-blue-900/20 transition-all active:scale-[0.98]"
                             >
-                                {loading ? 'Saving Event...' : 'Save Event'}
+                                {loading ? 'Saving Event...' : (id ? 'Update Event' : 'Save Event')}
                             </button>
                         </div>
                     </div>
