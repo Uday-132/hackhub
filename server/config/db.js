@@ -1,24 +1,39 @@
 const mongoose = require('mongoose');
-let isConnected = false;
+
+let cached = global.mongoose;
+
+if (!cached) {
+    cached = global.mongoose = { conn: null, promise: null };
+}
 
 const connectDB = async () => {
     mongoose.set('strictQuery', true);
 
-    if (isConnected) {
-        console.log('MongoDB is already connected');
-        return;
+    if (cached.conn) {
+        console.log('MongoDB is already connected (cached)');
+        return cached.conn;
+    }
+
+    if (!cached.promise) {
+        const opts = {
+            bufferCommands: false, // Disable buffering to fail fast if no connection
+        };
+
+        console.log('Initializing new MongoDB connection...');
+        cached.promise = mongoose.connect(process.env.MONGO_URI, opts).then((mongoose) => {
+            console.log(`MongoDB Connected: ${mongoose.connection.host}`);
+            return mongoose;
+        });
     }
 
     try {
-        const conn = await mongoose.connect(process.env.MONGO_URI);
-
-        isConnected = true;
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`Error: ${error.message}`);
-        // Do not exit process in serverless environment
-        // process.exit(1); 
+        cached.conn = await cached.promise;
+    } catch (e) {
+        cached.promise = null;
+        throw e;
     }
+
+    return cached.conn;
 };
 
 module.exports = connectDB;
