@@ -69,9 +69,40 @@ const deleteEvent = asyncHandler(async (req, res) => {
     res.status(200).json({ id: req.params.id });
 });
 
+// @desc    Update event
+// @route   PUT /api/events/:id
+// @access  Private/Admin
+const updateEvent = asyncHandler(async (req, res) => {
+    const event = await Event.findById(req.params.id);
+
+    if (!event) {
+        res.status(404);
+        throw new Error('Event not found');
+    }
+
+    // Check for user
+    if (!req.user) {
+        res.status(401);
+        throw new Error('User not found');
+    }
+
+    // Make sure logged in user is admin
+    if (req.user.role !== 'admin') {
+        res.status(401);
+        throw new Error('User not authorized');
+    }
+
+    const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+    });
+
+    res.status(200).json(updatedEvent);
+});
+
 module.exports = {
     getEvents,
     getEvent,
     createEvent,
     deleteEvent,
+    updateEvent,
 };
