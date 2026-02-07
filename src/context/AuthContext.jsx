@@ -44,13 +44,26 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const updateProfile = async (userData) => {
+        try {
+            const response = await api.put('/auth/profile', userData);
+            if (response.data) {
+                localStorage.setItem('user', JSON.stringify(response.data));
+                setUser(response.data);
+            }
+            return response.data;
+        } catch (error) {
+            throw new Error(error.response?.data?.message || 'Update failed');
+        }
+    };
+
     const logout = () => {
         localStorage.removeItem('user');
         setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ user, role: user?.role, loading, login, signup, logout }}>
+        <AuthContext.Provider value={{ user, role: user?.role, loading, login, signup, logout, updateProfile }}>
             {!loading && children}
         </AuthContext.Provider>
     );

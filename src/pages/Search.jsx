@@ -89,7 +89,7 @@ export default function Search() {
                 </div>
 
                 {/* Filters */}
-                <div className="flex gap-2 mt-4 overflow-x-auto pb-2 scrollbar-hide">
+                <div className="flex gap-2 mt-4 flex-wrap">
                     <div className="p-2 bg-[#111111] border border-white/10 rounded-xl">
                         <Filter size={18} className="text-purple-500" />
                     </div>
@@ -98,8 +98,8 @@ export default function Search() {
                             key={filter}
                             onClick={() => setActiveFilter(filter)}
                             className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all border ${activeFilter === filter
-                                    ? 'bg-purple-600 border-purple-500 text-white shadow-lg shadow-purple-900/20'
-                                    : 'bg-[#111111] border-white/10 text-gray-400 hover:border-white/20'
+                                ? 'bg-purple-600 border-purple-500 text-white shadow-lg shadow-purple-900/20'
+                                : 'bg-[#111111] border-white/10 text-gray-400 hover:border-white/20'
                                 }`}
                         >
                             {filter}
