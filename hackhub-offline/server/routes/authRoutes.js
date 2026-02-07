@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-registerUser,
+const {
+    registerUser,
     loginUser,
     getMe,
     updateUser,
