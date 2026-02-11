@@ -26,9 +26,12 @@ export default function Navbar() {
                     <span className="text-[10px] font-medium">SEARCH</span>
                 </button>
 
-                <button className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300">
-                    <Ticket size={24} />
-                    <span className="text-[10px] font-medium">TICKETS</span>
+                <button
+                    onClick={() => navigate('/pathfinder')}
+                    className={`flex flex-col items-center gap-1 ${isActive('/pathfinder') ? 'text-purple-500' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                    <Compass size={24} />
+                    <span className="text-[10px] font-medium">PATHFINDER</span>
                 </button>
 
                 <button

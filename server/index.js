@@ -40,6 +40,8 @@ app.get('/', (req, res) => {
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/events', require('./routes/eventRoutes'));
 app.use('/api/registrations', require('./routes/registrationRoutes'));
+app.use('/api/admin', require('./routes/adminRoutes'));
+app.use('/api/pathfinder', require('./routes/pathfinderRoutes'));
 
 // Global Error Handler
 app.use(errorHandler);

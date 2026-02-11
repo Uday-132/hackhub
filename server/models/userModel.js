@@ -26,6 +26,11 @@ const userSchema = mongoose.Schema(
             type: String,
             default: '',
         },
+        // Pathfinder Fields
+        careerGoal: { type: String, default: '' },
+        skillLevel: { type: String, default: 'Beginner' },
+        targetOutcome: { type: String, default: '' },
+        availability: { type: Number, default: 5 },
     },
     {
         timestamps: true,

@@ -10,8 +10,12 @@ import Events from './pages/Events';
 import EventDetails from './pages/EventDetails';
 import AdminDashboard from './pages/admin/Dashboard';
 import AddEvent from './pages/admin/AddEvent';
+import AdminUsers from './pages/admin/Users';
+import AdminStats from './pages/admin/Stats';
+import AdminSettings from './pages/admin/Settings';
 import Unauthorized from './pages/Unauthorized';
 import Search from './pages/Search';
+import Pathfinder from './pages/Pathfinder';
 import Profile from './pages/Profile';
 import EditProfile from './pages/settings/EditProfile';
 import Notifications from './pages/settings/Notifications';
@@ -32,6 +36,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/events" element={<Events />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/pathfinder" element={<Pathfinder />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings/edit-profile" element={<EditProfile />} />
             <Route path="/settings/notifications" element={<Notifications />} />
@@ -44,6 +49,9 @@ function App() {
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/add-event" element={<AddEvent />} />
             <Route path="/admin/edit-event/:id" element={<AddEvent />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/stats" element={<AdminStats />} />
+            <Route path="/admin/settings" element={<AdminSettings />} />
           </Route>
         </Routes>
       </AuthProvider>

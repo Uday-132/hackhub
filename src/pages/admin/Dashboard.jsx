@@ -18,7 +18,8 @@ export default function Dashboard() {
 
     const fetchEvents = async () => {
         try {
-            const response = await api.get('/events');
+            // Fetch only events created by the logged-in admin
+            const response = await api.get('/events/mine');
             setEvents(response.data || []);
         } catch (error) {
             console.error('Error fetching events:', error);
